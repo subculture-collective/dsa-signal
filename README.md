@@ -29,9 +29,12 @@ only as trustworthy as the server that delivers it.
   Rust/WebAssembly crypto. It requires encryption before it syncs or sends, and
   verifies devices with short authentication strings (emoji comparison).
 - **Encrypted direct chat** between two members.
-- **Access revocation.** Revoking a member's entitlement removes their access
-  through a background worker.
-- **Retention cleanup** for control-plane records.
+- **Access revocation (partial).** Revoking a member suspends their
+  control-plane mapping, entitlement and sessions. It does not yet remove them
+  from Matrix rooms, end their MAS session or rotate room keys, so a revoked
+  member can still reach conversations their devices already joined.
+- **Retention cleanup** for control-plane records, run on a schedule the
+  operator sets up.
 - The control plane never receives Matrix tokens, messages, room state,
   attachments or recovery keys.
 
