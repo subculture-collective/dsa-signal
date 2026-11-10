@@ -20,6 +20,18 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      # The reviewed Compose render goldens come from Docker Compose v5.7.0
+      # (Kvant's runner); the hosted image ships an older Compose.
+      - name: Install Docker Compose v5.7.0
+        run: |
+          set -euo pipefail
+          url=https://github.com/docker/compose/releases/download/v5.7.0/docker-compose-linux-x86_64
+          curl -fsSL -o docker-compose "$url"
+          echo '7758048ad38e580f22559603312874fec8bb638d021a9e64182385fc17cc12a2  docker-compose' | sha256sum -c -
+          mkdir -p ~/.docker/cli-plugins
+          install -m 0755 docker-compose ~/.docker/cli-plugins/docker-compose
+          rm docker-compose
+          docker compose version
       - name: Pull locked Postgres image
         run: docker pull "$(sed -n 's/^POSTGRES_IMAGE=//p' deploy/locks/images.env)"
       - name: Verify template baseline
