@@ -10,10 +10,7 @@ It is in development. Encrypted one-to-one chat is the first goal, and it has
 not yet been tested end to end with real member accounts. Do not rely on it
 for sensitive conversations.
 
-This project is not affiliated or interoperable with Signal. Matrix end-to-end
-encryption protects message content. It does not hide account, room, device,
-timing, IP address or access metadata from the service, and the web client is
-only as trustworthy as the server that delivers it.
+> This project is not affiliated or interoperable with Signal. Matrix E2EE protects message content, not service-visible account, room, device, timing, IP, or access metadata. The web client remains vulnerable to a compromised application origin.
 
 ## Features
 
